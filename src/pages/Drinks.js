@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import MyContext from '../context/MyContext';
+import MyContext from '../context/MyContext'
 import './style/Drinks.css';
-
 import { ApiDrinksName, ApiAllCategoryDrink, ApiByCategoryDrink }
 from '../services/ApiDrinks';
 
@@ -50,8 +49,11 @@ function Drinks() {
             data-testid="All-category-filter"
             name="All"
             className="category"
+            data-testid={ `${item.strCategory}-category-filter` }
+            name={ item.strCategory }
             type="button"
             onClick={ handleClick }
+            key={ item.idDrink }
           >
             All
           </button>
@@ -75,6 +77,19 @@ function Drinks() {
               className="card"
               key={ drink.strDrink }
               data-testid={ `${index}-recipe-card` }
+            { item.strCategory }
+          </button>
+        ))}
+      <h1>Main screen drinks</h1>
+      {ingredients
+        .map((drink, index) => (
+          <div
+            className="card"
+            key={ drink.strDrink }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <Link
+              to={ `/drinks/${drink.idDrink}` }
             >
               <Link
                 to={ `/drinks/${drink.idDrink}` }
