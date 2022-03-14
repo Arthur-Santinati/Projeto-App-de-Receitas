@@ -1,0 +1,43 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "grunt.autoDetect": "on",
+    "tabnine.experimentalAutoImports": true,
+    "explorer.confirmDragAndDrop": false,
+    "editor.minimap.enabled": false,
+    "explorer.confirmDelete": false,
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "editor.rulers": [
+        100
+    ],
+    "editor.formatOnSave": true,
+    "editor.renderLineHighlight": "gutter",
+    "emmet.syntaxProfiles": {
+        "javascript": "jsx",
+        "nunjucks": "html"
+    },
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "nunjucks": "html"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "workbench.colorTheme": "Origamid Next",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[css]": {
+        "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    },
+    "bracket-pair-colorizer-2.depreciation-notice": false,
+    "editor.fontFamily": "cascadia code",
+    "editor.fontLigatures": true,
+    "workbench.editor.untitled.hint": "hidden",
+    "workbench.startupEditor": "none"
+}

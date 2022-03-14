@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import MyContext from '../context/MyContext';
+// import '../pages/style/Search.css';
 
 function Search() {
   const { setInputValue, inputValue,
@@ -10,7 +11,7 @@ function Search() {
   } = useContext(MyContext);
 
   return (
-    <section>
+    <section className="search">
       <input
         type="text"
         data-testid="search-input"

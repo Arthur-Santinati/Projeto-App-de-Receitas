@@ -1,0 +1,22 @@
+.drinks-container {
+  margin-top: 6rem;
+}
+
+.category {
+  background-color: #f7a100;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flexbox;
+  font-size: 18px;
+  justify-content: center;
+  margin: 5px;
+  padding: 5px 10px;
+  text-align: center;
+  transition: 0.22s;
+}
+
+.category:hover {
+  background-color: #ff5100;
+  color: black;
+}
