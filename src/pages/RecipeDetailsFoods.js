@@ -5,7 +5,10 @@ import { ApiFoodById } from '../services/ApiMeals';
 import Paragraph from '../components/Paragraph';
 import { ApiDrinkRecomendation } from '../services/ApiDrinks';
 import shareIcon from '../images/shareIcon.svg';
-import './style/RecipeDetails.css';
+import './style/DetailsPage.css';
+import '../components/recomend.css';
+
+// import './style/RecipeDetails.css';
 
 function RecipeDetailsFoods() {
   const NUMBER_SIX = 6;
@@ -22,7 +25,9 @@ function RecipeDetailsFoods() {
     async function getRecomendation() {
       const result = await ApiDrinkRecomendation();
       const filter = result.slice(0, NUMBER_SIX);
-      setFoodRecomend(filter);
+
+      return setFoodRecomend(filter);
+
     }
     getId();
     getRecomendation();
@@ -87,11 +92,46 @@ function RecipeDetailsFoods() {
             alt="ImageCard"
             data-testid="recipe-photo"
           />
-          <p
-            data-testid={ `${index}-recomendation-card` }
-          >
-            Receitas recomendadas
+
+          <p data-testid="instructions">
+            { foods.strInstructions }
           </p>
+          <iframe title="video" data-testid="video" src="">VIdeo</iframe>
+          <div
+            className="containerRecomend"
+          >
+            <p>Receitas recomendadas</p>
+            <div className="cardRecomend">
+              {foodRecomend
+                .map((food, ind) => (
+                  <div
+                    className="cardRecomend2"
+                    key={ food.idDrink }
+                    data-testid={ `${ind}-recomendation-card` }
+                  >
+                    <Link
+                      to={ `/drinks/${food.idDrink}` }
+                    >
+                      <img
+                        src={ food.strDrinkThumb }
+                        alt="ImageCard"
+                        width="100px"
+                        data-testid={ `${ind}-card-img` }
+                      />
+                    </Link>
+                    <h4 data-testid={ `${ind}-recomendation-title` }>{food.strDrink}</h4>
+                  </div>
+
+                )) }
+            </div>
+          </div>
+
+//           <p
+//             data-testid={ `${index}-recomendation-card` }
+//           >
+//             Receitas recomendadas
+//           </p>
+
           <p
             data-testid={ `${index}-ingredient-name-and-measure` }
           />
