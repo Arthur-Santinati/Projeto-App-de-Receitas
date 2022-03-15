@@ -8,8 +8,6 @@ import shareIcon from '../images/shareIcon.svg';
 import './style/DetailsPage.css';
 import '../components/recomend.css';
 
-// import './style/RecipeDetails.css';
-
 function RecipeDetailsFoods() {
   const NUMBER_SIX = 6;
   const history = useHistory();
@@ -27,7 +25,6 @@ function RecipeDetailsFoods() {
       const filter = result.slice(0, NUMBER_SIX);
 
       return setFoodRecomend(filter);
-
     }
     getId();
     getRecomendation();
@@ -125,12 +122,6 @@ function RecipeDetailsFoods() {
                 )) }
             </div>
           </div>
-
-//           <p
-//             data-testid={ `${index}-recomendation-card` }
-//           >
-//             Receitas recomendadas
-//           </p>
 
           <p
             data-testid={ `${index}-ingredient-name-and-measure` }
