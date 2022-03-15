@@ -39,9 +39,9 @@ function Foods() {
     return setIngredients(categoryFilter);
   }
   return (
-    <section>
+    <section className="">
       <Header />
-      <div className="foods-container">
+      <div className="container">
         <div className="categorys">
           <button
             data-testid="All-category-filter"
@@ -65,7 +65,6 @@ function Foods() {
                 { item.strCategory }
               </button>))}
         </div>
-        <h1>Main Screen Foods</h1>
         {ingredients
           .map((food, index) => (
             <div
@@ -73,18 +72,17 @@ function Foods() {
               key={ food.idMeal }
               data-testid={ `${index}-recipe-card` }
             >
+              <h4 data-testid={ `${index}-card-name` }>{food.strMeal}</h4>
               <Link
                 to={ `/foods/${food.idMeal}` }
               >
                 <img
                   src={ food.strMealThumb }
                   alt="ImageCard"
-                  width="200px"
-                  height="200px"
+                  className="imgFood"
                   data-testid={ `${index}-card-img` }
                 />
               </Link>
-              <h4 data-testid={ `${index}-card-name` }>{food.strMeal}</h4>
             </div>)) }
         <Footer />
       </div>

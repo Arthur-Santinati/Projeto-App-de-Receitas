@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import MyContext from '../context/MyContext'
-import './style/Drinks.css';
+import MyContext from '../context/MyContext';
 import { ApiDrinksName, ApiAllCategoryDrink, ApiByCategoryDrink }
 from '../services/ApiDrinks';
+import './style/Drinks.css';
 
 function Drinks() {
   const NUMBER_TWELVE = 12;
@@ -43,17 +43,14 @@ function Drinks() {
   return (
     <section>
       <Header />
-      <div className="drinks-container">
+      <div className="container">
         <div className="categorys">
           <button
             data-testid="All-category-filter"
             name="All"
             className="category"
-            data-testid={ `${item.strCategory}-category-filter` }
-            name={ item.strCategory }
             type="button"
             onClick={ handleClick }
-            key={ item.idDrink }
           >
             All
           </button>
@@ -62,35 +59,23 @@ function Drinks() {
               <button
                 data-testid={ `${item.strCategory}-category-filter` }
                 name={ item.strCategory }
-                key={ item.idDrink }
+                className="category"
                 type="button"
                 onClick={ handleClick }
-                className="category"
+                key={ item.idDrink }
               >
                 { item.strCategory }
-              </button>))}
+              </button>
+            ))}
         </div>
-        <h1>Main screen drinks</h1>
         {ingredients
           .map((drink, index) => (
             <div
               className="card"
               key={ drink.strDrink }
               data-testid={ `${index}-recipe-card` }
-            { item.strCategory }
-          </button>
-        ))}
-      <h1>Main screen drinks</h1>
-      {ingredients
-        .map((drink, index) => (
-          <div
-            className="card"
-            key={ drink.strDrink }
-            data-testid={ `${index}-recipe-card` }
-          >
-            <Link
-              to={ `/drinks/${drink.idDrink}` }
             >
+              <h4 data-testid={ `${index}-card-name` }><b>{drink.strDrink}</b></h4>
               <Link
                 to={ `/drinks/${drink.idDrink}` }
               >
@@ -98,15 +83,9 @@ function Drinks() {
                   data-testid={ `${index}-card-img` }
                   src={ drink.strDrinkThumb }
                   alt="ImageCard"
-                  width="200px"
-                  height="200px"
+                  className="imgDrink"
                 />
               </Link>
-              <p>
-                { drink.strCategory }
-              </p>
-              <h4 data-testid={ `${index}-card-name` }><b>{drink.strDrink}</b></h4>
-              <p>{ drink.strAlcoholic }</p>
             </div>)) }
         <Footer />
       </div>

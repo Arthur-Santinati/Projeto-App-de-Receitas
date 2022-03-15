@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 function ExploreFoods({ history }) {
   return (
-    <section>
+    <section className="container">
       <Header />
       <button
         type="button"

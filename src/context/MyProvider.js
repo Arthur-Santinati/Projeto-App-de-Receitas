@@ -43,6 +43,7 @@ function MyProvider({ children }) {
       isFav ? (
         <button
           type="button"
+          className="btn"
           onClick={ () => setIsFav(false) }
         >
           <img
@@ -54,6 +55,7 @@ function MyProvider({ children }) {
         : (
           <button
             type="button"
+            className="btn"
             onClick={ () => setIsFav(true) }
           >
             <img

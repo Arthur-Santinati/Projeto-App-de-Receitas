@@ -19,34 +19,39 @@ function Profile({ history }) {
     <div>
       <section>
         <Header />
-        <h4
-          data-testid="profile-email"
-        >
-          Your Email:
-          { ' ' }
-          {localStorage.getItem('user') ? getEMail() : 'Email não encontrado'}
-        </h4>
-        <button
-          type="button"
-          data-testid="profile-done-btn"
-          onClick={ () => history.push('/done-recipes') }
-        >
-          Done Recipes
-        </button>
-        <button
-          type="button"
-          data-testid="profile-favorite-btn"
-          onClick={ () => history.push('/favorite-recipes') }
-        >
-          Favorite Recipes
-        </button>
-        <button
-          type="button"
-          data-testid="profile-logout-btn"
-          onClick={ profileButton } // limpar todas as chaves do localStorage ao clicar nesse botao
-        >
-          Logout
-        </button>
+        <div className="container-explorer">
+          <h4
+            data-testid="profile-email"
+          >
+            Your Email:
+            { ' ' }
+            {localStorage.getItem('user') ? getEMail() : 'Email não encontrado'}
+          </h4>
+          <button
+            type="button"
+            className="btn-explorer"
+            data-testid="profile-done-btn"
+            onClick={ () => history.push('/done-recipes') }
+          >
+            Done Recipes
+          </button>
+          <button
+            type="button"
+            className="btn-explorer"
+            data-testid="profile-favorite-btn"
+            onClick={ () => history.push('/favorite-recipes') }
+          >
+            Favorite Recipes
+          </button>
+          <button
+            type="button"
+            className="btn-explorer"
+            data-testid="profile-logout-btn"
+            onClick={ profileButton } // limpar todas as chaves do localStorage ao clicar nesse botao
+          >
+            Logout
+          </button>
+        </div>
       </section>
       <Footer />
     </div>

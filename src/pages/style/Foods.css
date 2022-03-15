@@ -1,38 +1,37 @@
-.foods-container {
-  align-items: center;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  font-size: 1.5rem;
-  margin: 150px auto;
-  margin-top: 0.2rem;
-  padding: 80px;
-  width: 40%;
+.imgFood {
+  border-radius: 4px;
+  box-shadow: 6px 11px 13px 7px rgba(0, 0, 0, 0.79);
+  display: inline-block;
+  height: 300px;
+  width: 300px;
+}
+
+h4 {
+  color: #f7a100;
+}
+
+.card {
+  margin-top: 30px;
 }
 
 .categorys {
-  display: flex;
-  justify-content: center;
+  margin-top: 30px;
+  text-align: center;
   width: 100%;
 }
 
 .category {
-  background-color: #f7a100;
+  background: #f7a100;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
-  display: flexbox;
-  font-size: 18px;
-  margin: 5px;
-  padding: 5px 10px;
-  transition: 0.22s;
+  display: inline;
+  font-weight: 700;
+  margin: 8px;
+  padding: 10px 20px;
 }
 
 .category:hover {
   background-color: #ff5100;
   color: black;
-}
-
-.card {
-  display: flexbox;
 }

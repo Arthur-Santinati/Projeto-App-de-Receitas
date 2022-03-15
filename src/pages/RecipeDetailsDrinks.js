@@ -34,19 +34,25 @@ function RecipeDetailsDrinks() {
   }
 
   return (
-    <section>
-      <h1>Recipe details Drinks</h1>
+    <section className="container-recipes">
       {drinkDetails.map((item, index) => (
-
         <div
           className="card"
           key={ item.idDrink }
         >
+          <img
+            src={ item.strDrinkThumb }
+            alt="ImageCard"
+            className="imgDrink"
+            data-testid="recipe-photo"
+          />
           <h4 data-testid="recipe-title">
             {item.strDrink}
           </h4>
+          { btnLike() }
           <button
             type="button"
+            className="btn"
             data-testid="share-btn"
           >
             <img
@@ -54,16 +60,8 @@ function RecipeDetailsDrinks() {
               src={ shareIcon }
             />
           </button>
-          { btnLike() }
           <p data-testid="recipe-category">{ item.strCategory }</p>
           <p data-testid="recipe-category">{ item.strAlcoholic }</p>
-          <img
-            src={ item.strDrinkThumb }
-            alt="ImageCard"
-            width="200px"
-            height="200px"
-            data-testid="recipe-photo"
-          />
           <p data-testid="instructions">
             { item.strInstructions }
           </p>

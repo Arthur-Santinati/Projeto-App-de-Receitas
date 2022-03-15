@@ -1,10 +1,9 @@
 body {
   margin: 0;
+  border: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
@@ -14,4 +13,19 @@ code {
 
 html {
   scroll-behavior: smooth;
+  background: url('./images/login900.jpg') no-repeat bottom center;
+  background-size: cover;
+  background-attachment: fixed;
+
+}
+
+.container {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  margin-top: 4.5rem;
+  width: 100%;
 }

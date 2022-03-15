@@ -13,7 +13,6 @@ function RecipeDetailsFoods() {
   const [copySuccess, setCopySuccess] = useState('');
   const { id } = useParams();
   const { btnLike } = useContext(MyContext);
-  // console.log(history.location.pathname);
   const url = history.location.pathname;
 
   useEffect(() => {
@@ -40,18 +39,25 @@ function RecipeDetailsFoods() {
     doThis();
   }
   return (
-    <section>
-      <h1>Recipe details Foods</h1>
+    <section className="container-recipes">
       {foodDetail.map((foods, index) => (
         <div
           className="card"
           key={ foods.idMeal }
         >
+          <img
+            src={ foods.strMealThumb }
+            alt="ImageCard"
+            className="imgFood"
+            data-testid="recipe-photo"
+          />
           <h4 data-testid="recipe-title">
             {foods.strMeal}
           </h4>
+          { btnLike() }
           <button
             type="button"
+            className="btn"
             data-testid="share-btn"
             onClick={ () => copying() }
           >
@@ -60,15 +66,7 @@ function RecipeDetailsFoods() {
               src={ shareIcon }
             />
           </button>
-          { btnLike() }
           <p data-testid="recipe-category">{ foods.strCategory }</p>
-          <img
-            src={ foods.strMealThumb }
-            alt="ImageCard"
-            width="200px"
-            height="200px"
-            data-testid="recipe-photo"
-          />
           <p data-testid="instructions">
             { foods.strInstructions }
           </p>
