@@ -1,0 +1,14 @@
+.start_recipe_btn {
+  bottom: 0;
+  position: fixed;
+}
+
+.card-item {
+  width: 100%;
+}
+
+.card-items {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}

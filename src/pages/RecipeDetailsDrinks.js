@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { ApiDrinkById } from '../services/ApiDrinks';
 import { ApiFoodRecomendation } from '../services/ApiMeals';
 import MyContext from '../context/MyContext';
 import shareIcon from '../images/shareIcon.svg';
-import './style/DetailsPage.css';
+import './style/RecipeDetails.css';
 
 function RecipeDetailsDrinks() {
   const history = useHistory();
-  const { btnLike } = useContext(MyContext);
+  const NUMBER_SIX = 6;
+  const { btnLike, copySuccess, setCopySuccess } = useContext(MyContext);
   const [drinkDetails, setDrinkDetails] = useState([]);
-  const [drinkRecomend, setDrinkRecomend] = useState([]);
+  const [drinkRecomended, setDrinkRecomended] = useState([]);
   const { id } = useParams();
-  // console.log(id);
 
   useEffect(() => {
     async function getId() {
@@ -21,16 +21,26 @@ function RecipeDetailsDrinks() {
     }
     async function getRecomendation() {
       const result = await ApiFoodRecomendation();
-      return setDrinkRecomend(result);
+      const filter = result.slice(0, NUMBER_SIX);
+      setDrinkRecomended(filter);
     }
     getId();
     getRecomendation();
   }, [id]);
-  // console.log(drinkDetails);
-  console.log(drinkRecomend);
+  console.log(drinkRecomended);
 
   function StartRecipeClick() {
     history.push(`/drinks/${id}/in-progress`);
+  }
+
+  function copyingLink() {
+    const doThis = async () => {
+      const url = history.location.pathname;
+      await navigator.clipboard.writeText(`http://localhost:3000${url}`);
+      setCopySuccess(true);
+      // REFERÊNCIA: https://stackoverflow.com/questions/65930199/copy-active-browsers-url-to-clipboard-with-reactjs
+    };
+    doThis();
   }
 
   return (
@@ -50,10 +60,12 @@ function RecipeDetailsDrinks() {
             {item.strDrink}
           </h4>
           { btnLike() }
+          { copySuccess && <span>Link copied!</span>}
           <button
             type="button"
             className="btn"
             data-testid="share-btn"
+            onClick={ () => copyingLink() }
           >
             <img
               alt="favorite"
@@ -65,7 +77,7 @@ function RecipeDetailsDrinks() {
           <p data-testid="instructions">
             { item.strInstructions }
           </p>
-          <iframe title="video" data-testid="video" src="">VIdeo</iframe>
+          <iframe title="video" data-testid="video" src="">Video</iframe>
           <div>
             <p
               data-testid={ `${index}-recomendation-card` }
@@ -193,6 +205,25 @@ function RecipeDetailsDrinks() {
               { item.strMeasure20 }
             </p>
           </div>
+          {drinkRecomended.map((foods) => (
+            <div
+              className="cardRecomended"
+              key={ foods.idMeal }
+            >
+              <div className="card1">
+                <Link
+                  to={ `/drinks/${foods.idDrink}` }
+                >
+                  <img
+                    src={ foods.strMealThumb }
+                    alt="ImageCard"
+                    width="300px"
+                    height="300px"
+                  />
+                </Link>
+              </div>
+            </div>
+          ))}
           <button
             type="button"
             data-testid="start-recipe-btn"
