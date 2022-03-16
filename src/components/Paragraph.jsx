@@ -28,12 +28,11 @@ function Paragraph({ foods }) {
         {foods.strInstructions}
       </p>
       <iframe title="video" data-testid="video" src="">VIdeo</iframe>
-      <p
-        data-testid="0-ingredient-name-and-measure"
-      >
-        {foods.strIngredient1}
+      <div>
+        <input type="checked" id="ing1" data-testid="0-ingredient-name-and-measure" />
+        <label htmlFor="ing1">{foods.strIngredient1}</label>
         {foods.strMeasure1}
-      </p>
+      </div>
       <p
         data-testid="1-ingredient-name-and-measure"
       >
