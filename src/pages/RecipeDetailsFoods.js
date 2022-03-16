@@ -1,57 +1,61 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import MyContext from '../context/MyContext';
 import { ApiFoodById } from '../services/ApiMeals';
-import Paragraph from '../components/Paragraph';
+import Paragrafo from '../components/Paragrafo';
 import { ApiDrinkRecomendation } from '../services/ApiDrinks';
 import shareIcon from '../images/shareIcon.svg';
-import './style/DetailsPage.css';
 import '../components/recomend.css';
+import './style/RecipeDetails.css';
+import './style/Recomend.css';
 
 function RecipeDetailsFoods() {
   const NUMBER_SIX = 6;
   const history = useHistory();
   const [foodDetail, setFoodDetail] = useState([]);
   const [foodRecomend, setFoodRecomend] = useState([]);
+  const [isStarted, setIsStarted] = useState(false);
   const { id } = useParams();
   const { btnLike, copySuccess, setCopySuccess } = useContext(MyContext);
+  const [paragraphy, setParagraphy] = useState([]);
   useEffect(() => {
     async function getId() {
       const result = await ApiFoodById(id);
+      const ingredientsName = Object.entries(result[0])
+        .filter((item) => item[0].includes('strIngredient'))
+        .filter((item) => item[1] !== '' && item[1] !== ' ' && item[1] !== null)
+        .map((item) => item[1]);
+      setParagraphy(ingredientsName);
       return setFoodDetail(result);
     }
     async function getRecomendation() {
       const result = await ApiDrinkRecomendation();
       const filter = result.slice(0, NUMBER_SIX);
-
+      setFoodRecomend(filter);
       return setFoodRecomend(filter);
     }
     getId();
     getRecomendation();
   }, [id]);
-  console.log(foodRecomend);
+
   function copyingLink() {
     const doThis = async () => {
-      const url = history.location.pathname;
-      await navigator.clipboard.writeText(`http://localhost:3000${url}`);
+      await navigator.clipboard.writeText(`http://localhost:3000/foods/${id}`);
       setCopySuccess(true);
       return copySuccess;
     };
     doThis();
   }
-  // function handleStartFood() {
-  //   history.push(`/foods/${id}/in-progress`);
-  //   handleStartBtn();
-  //   const obj = {
-  //       meals: {
-  //           foodDetail[0]: [lista-de-ingredientes-utilizados],
-  //       }
-  //   };
-  //   localStorage.setItem('inProgressRecipes', JSON.stringify([obj]));
-  // }
+
+  function isStartedFunc() {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(true));
+    setIsStarted(true);
+    history.push(`/foods/${id}/in-progress`);
+  }
+
   return (
     <section className="container-recipes">
-      {foodDetail.map((foods, index) => (
+      {foodDetail.map((foods) => (
         <div
           className="card"
           key={ foods.idMeal }
@@ -84,12 +88,7 @@ function RecipeDetailsFoods() {
           <iframe title="video" data-testid="video" src="">VIdeo</iframe>
           { btnLike() }
           { copySuccess && <span>Link copied!</span>}
-          <img
-            src={ foods.strMealThumb }
-            alt="ImageCard"
-            data-testid="recipe-photo"
-          />
-
+          <p data-testid="recipe-category">{ foods.strCategory }</p>
           <p data-testid="instructions">
             { foods.strInstructions }
           </p>
@@ -97,7 +96,9 @@ function RecipeDetailsFoods() {
           <div
             className="containerRecomend"
           >
-            <p>Receitas recomendadas</p>
+            <p>
+              Receitas recomendadas
+            </p>
             <div className="cardRecomend">
               {foodRecomend
                 .map((food, ind) => (
@@ -122,7 +123,6 @@ function RecipeDetailsFoods() {
                 )) }
             </div>
           </div>
-
           <p
             data-testid={ `${index}-ingredient-name-and-measure` }
           />
@@ -144,19 +144,30 @@ function RecipeDetailsFoods() {
                 </Link>
               </div>
             ))}
+          <div>
+            ingredients
+            <Paragrafo iten={ foods } paragraphy={ paragraphy } />
           </div>
+          {// com isso deu certo o paragrafo de forma dinãmica...fiz assim:
+          // peguei const ingredientsName = Object.entries(result[0]), que haviamos feito no foodsInProgress
+          // então logicamente as quantidades serão as mesmas dos ingredientes ,
+          // então peguei somente um Object.entries, só para servir de parametro em relação ao tamanho ou seja...
+          // renderizar quantidades de paragrafos de acordo com o tamanho de seu length.
+          // então armazenei o ingredientsName assim: setParagraphy(ingredientsName)
+          // depois então passei como props para o component <Paragrafo >,o paragraphy
+          //  usando o index do paragraphy ,ou seja , seu tamanho.
+          }
           <button
             type="button"
             data-testid="start-recipe-btn"
-            // onClick={}
+            onClick={ isStartedFunc }
             className="start_recipe_btn"
           >
-            Start Recipe
+            { isStarted ? 'Continue Recipe' : 'Start Recipe' }
           </button>
         </div>
       ))}
     </section>
   );
 }
-
 export default RecipeDetailsFoods;

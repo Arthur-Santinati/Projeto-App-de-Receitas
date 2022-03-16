@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import MyContext from './MyContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -18,14 +18,18 @@ function MyProvider({ children }) {
   const [currentFilter, setCurrentFilter] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [drinkDetails, setDrinkDetails] = useState([]);
+  const [drinkRecomended, setDrinkRecomended] = useState([]);
   const [isFav, setIsFav] = useState(true);
-  // const [startButton, setStartButton] = useState('Start Recipe');
   const [copySuccess, setCopySuccess] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
+  const NUMBER_SIX = 6;
   const NUMBER_ONE = 1;
   const NUMBER_TWELVE = 12;
   const firstLetter = 'firstLetter';
   const stringName = 'name';
   const ingredientName = 'ingredients';
+  const { id } = useParams();
 
   const history = useHistory();
   const { location: { pathname } } = history;
@@ -40,6 +44,21 @@ function MyProvider({ children }) {
     setCurrentFilter(firstLetter);
   }
 
+  function isStartedFunc() {
+    setIsStarted(true);
+  }
+
+  function setingFavFalse() {
+    setIsFav(false);
+    const obj = { id };
+    localStorage.setItem('favoriteRecipes', JSON.stringify([obj]));
+  }
+
+  function setingFavTrue() {
+    setIsFav(true);
+    localStorage.removeItem('favoriteRecipes');
+  }
+
   function btnLike() {
     return (
       isFav ? (
@@ -47,6 +66,7 @@ function MyProvider({ children }) {
           type="button"
           className="btn"
           onClick={ () => setIsFav(false) }
+          onClick={ setingFavFalse }
         >
           <img
             data-testid="favorite-btn"
@@ -59,6 +79,7 @@ function MyProvider({ children }) {
             type="button"
             className="btn"
             onClick={ () => setIsFav(true) }
+            onClick={ setingFavTrue }
           >
             <img
               alt="favorite"
@@ -68,29 +89,6 @@ function MyProvider({ children }) {
           </button>)
     );
   }
-  // function btnStartRecipe() {
-  //   return (
-  //     <button
-  //       type="button"
-  //       data-testid="start-recipe-btn"
-  //       onClick={ handleStartBtn }
-  //       className="start_recipe_btn"
-  //     >
-  //       { startButton }
-  //     </button>
-  //   );
-  // }
-  // const { id } = useParams();
-  // function handleStartBtn() {
-  //   history.push(`/foods/${id}/in-progress`);
-  //   const resultLS = localStorage.getItem('inProgressRecipes');
-  //   if (resultLS !== null) {
-  //     localStorage.setItem('inProgressRecipes', id);
-  //     setStartButton('Continue Recipe');
-  //     btnStartRecipe();
-  //   }
-  // }
-
   async function handleCheckDrink() {
     const result = await ApiDrinksName(inputValue);
     if (result === null) {
@@ -165,6 +163,13 @@ function MyProvider({ children }) {
   }
 
   const value = {
+    isStarted,
+    isStartedFunc,
+    NUMBER_SIX,
+    drinkDetails,
+    setDrinkDetails,
+    drinkRecomended,
+    setDrinkRecomended,
     copySuccess,
     setCopySuccess,
     btnLike,

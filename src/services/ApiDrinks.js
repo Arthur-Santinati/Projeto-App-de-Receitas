@@ -75,3 +75,25 @@ export const ApiDrinkRecomendation = async () => {
     return error;
   }
 };
+
+export const ApiDrinkSurprise = async () => {
+  const url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const ApiDrinkAllIngredients = async () => {
+  const url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    return error;
+  }
+};

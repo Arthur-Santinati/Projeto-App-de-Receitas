@@ -26,6 +26,7 @@ function Footer() {
       <button
         className="btn-footer"
         type="button"
+        className="btn-footer"
         onClick={ () => history.push('/foods') }
       >
         <img data-testid="food-bottom-btn" src={ mealIcon } alt="food-icon" />
