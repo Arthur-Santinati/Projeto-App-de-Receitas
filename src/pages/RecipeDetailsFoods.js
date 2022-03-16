@@ -88,11 +88,6 @@ function RecipeDetailsFoods() {
           <iframe title="video" data-testid="video" src="">VIdeo</iframe>
           { btnLike() }
           { copySuccess && <span>Link copied!</span>}
-          <p data-testid="recipe-category">{ foods.strCategory }</p>
-          <p data-testid="instructions">
-            { foods.strInstructions }
-          </p>
-          <iframe title="video" data-testid="video" src="">VIdeo</iframe>
           <div
             className="containerRecomend"
           >
