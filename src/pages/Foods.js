@@ -12,6 +12,7 @@ function Foods() {
   const { ingredients, setIngredients } = useContext(MyContext);
   const [foodCategory, setFoodCategory] = useState([]);
   const [currentFilter, setCurrentFilter] = useState('');
+
   useEffect(() => {
     async function getCategoryFood() {
       const result = await ApiCategoryFood();
@@ -23,8 +24,10 @@ function Foods() {
       const filter = result.slice(0, NUMBER_TWELVE);
       setIngredients(filter);
     }
+
     initialFetch();
     getCategoryFood();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setIngredients]);
 
   async function handleClick({ target }) {
@@ -38,6 +41,7 @@ function Foods() {
     setCurrentFilter(target.name);
     return setIngredients(categoryFilter);
   }
+
   return (
     <section className="">
       <Header />
@@ -45,10 +49,10 @@ function Foods() {
         <div className="categorys">
           <button
             data-testid="All-category-filter"
+            className="category"
             name="All"
             type="button"
             onClick={ handleClick }
-            className="category"
           >
             All
           </button>
@@ -56,9 +60,9 @@ function Foods() {
             .map((item) => (
               <button
                 key={ item.strCategory }
-                className="category"
                 type="button"
                 name={ item.strCategory }
+                className="category"
                 data-testid={ `${item.strCategory}-category-filter` }
                 onClick={ handleClick }
               >

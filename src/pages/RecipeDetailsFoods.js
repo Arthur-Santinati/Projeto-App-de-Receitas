@@ -51,7 +51,6 @@ function RecipeDetailsFoods() {
     if (JSON.parse(localStorage.getItem('favoriteRecipes')) !== null) {
       if ((localStorage.getItem('favoriteRecipes')).includes(id)) {
         setIsFav(true);
-        // console.log('foi memo');
       } else {
         setIsFav(false);
       }
@@ -59,7 +58,7 @@ function RecipeDetailsFoods() {
     getId();
     getRecomendation();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, setButtonChecked]);
 
   function copyingLink() {
     const doThis = async () => {
@@ -73,7 +72,6 @@ function RecipeDetailsFoods() {
   function isStartedFunc() {
     const obj = [{ meals: { [id]: paragraphy } }];
     const obj1 = { meals: { [id]: paragraphy } };
-    // console.log(paragraphy);
     if (JSON.parse(localStorage.getItem('inProgressRecipes')) !== null) {
       const newObjt = JSON.parse(localStorage.getItem('inProgressRecipes'));
       const progressRecipes = [...newObjt, obj1];
@@ -88,7 +86,6 @@ function RecipeDetailsFoods() {
   }
 
   function setingFavorite() {
-    console.log('clicado');
     const food = foodDetail[0];
     const typeOf = history.location.pathname.slice(1, FIVE);
     const obj = [{ id,
@@ -108,14 +105,11 @@ function RecipeDetailsFoods() {
     setIsFav(true);
     if (JSON.parse(localStorage.getItem('favoriteRecipes')) !== null) {
       if ((localStorage.getItem('favoriteRecipes')).includes(id)) {
-        console.log('item ja existe filhote');
         setIsFav(false);
-        // const itemWillBeRemoved = (localStorage.getItem('favoriteRecipes')).includes(id);
         const itemWillBeRemoved = JSON.parse(localStorage.getItem('favoriteRecipes'));
         const testando = itemWillBeRemoved.filter((item) => item.id !== id);
-        console.log(testando);
         localStorage.setItem('favoriteRecipes', JSON.stringify(testando));
-        // (localStorage.removeItem('favoriteRecipes')).includes(id);
+        return;
       }
       const newObjt = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const progressRecipes = [...newObjt, obj1];

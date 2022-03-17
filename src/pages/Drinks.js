@@ -47,8 +47,8 @@ function Drinks() {
         <div className="categorys">
           <button
             data-testid="All-category-filter"
-            name="All"
             className="category"
+            name="All"
             type="button"
             onClick={ handleClick }
           >
@@ -59,8 +59,8 @@ function Drinks() {
               <button
                 data-testid={ `${item.strCategory}-category-filter` }
                 name={ item.strCategory }
-                className="category"
                 type="button"
+                className="category"
                 onClick={ handleClick }
                 key={ item.idDrink }
               >
@@ -80,12 +80,15 @@ function Drinks() {
                 to={ `/drinks/${drink.idDrink}` }
               >
                 <img
+                  className="imgDrink"
                   data-testid={ `${index}-card-img` }
                   src={ drink.strDrinkThumb }
                   alt="ImageCard"
-                  className="imgDrink"
                 />
               </Link>
+              <p>
+                { drink.strCategory }
+              </p>
             </div>)) }
         <Footer />
       </div>

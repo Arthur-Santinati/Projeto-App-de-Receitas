@@ -1,17 +1,11 @@
 .imgFood {
-  border-radius: 4px;
   box-shadow: 6px 11px 13px 7px rgba(0, 0, 0, 0.79);
-  display: inline-block;
   height: 300px;
   width: 300px;
 }
 
 h4 {
   color: #f7a100;
-}
-
-.card {
-  margin-top: 30px;
 }
 
 .categorys {
