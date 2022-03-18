@@ -103,50 +103,58 @@ export default function FoodsInProgress() {
             src={ item.strMealThumb }
             alt="ImageCard"
             data-testid="recipe-photo"
-            className="imgFood"
+            className="ImageProgress"
           />
-          <h4 data-testid="recipe-title">
-            {item.strMeal}
-          </h4>
-          <button
-            type="button"
-            className="btn-recipe"
-            onClick={ setingFavorite }
-          >
-            <img
-              alt="favorite"
-              data-testid="favorite-btn"
-              src={ isFav ? blackHeartIcon : whiteHeartIcon }
-            />
-          </button>
-          <button
-            type="button"
-            className="btn-recipe"
-            data-testid="share-btn"
-            onClick={ () => copyingLink() }
-          >
-            <img
-              alt="favorite"
-              src={ shareIcon }
-            />
-          </button>
-          { copySuccess && <span>Link copied!</span>}
+          <div className="title-btn">
+            <h4 data-testid="recipe-title" className="name">
+              {item.strMeal}
+            </h4>
+            <div>
+              <button
+                type="button"
+                className="btn-recipe"
+                onClick={ setingFavorite }
+              >
+                <img
+                  alt="favorite"
+                  data-testid="favorite-btn"
+                  src={ isFav ? blackHeartIcon : whiteHeartIcon }
+                />
+              </button>
+              <button
+                type="button"
+                className="btn-recipe"
+                data-testid="share-btn"
+                onClick={ () => copyingLink() }
+              >
+                <img
+                  alt="favorite"
+                  src={ shareIcon }
+                />
+              </button>
+              { copySuccess && <span>Link copied!</span>}
+            </div>
+          </div>
           <p data-testid="recipe-category">{ item.strCategory }</p>
+          <h4>Instructions</h4>
           <p data-testid="instructions">
             { item.strInstructions }
           </p>
+          <h4 className="ingredi">Ingredients</h4>
           {paragraphy.map((ingrid, index) => (
             <div
+              className="ingrid"
               key={ ingrid }
               data-testid={ `${index}-ingredient-step` }
             >
-              {`${item[`strIngredient${index + 1}`]}
-              : ${item[`strMeasure${index + 1}`]}` }
               <input
                 type="checkbox"
+                className="checkbox"
                 value={ `${item[`strIngredient${index + 1}`]}
               : ${item[`strMeasure${index + 1}`]}` }
               />
+              {`${item[`strIngredient${index + 1}`]}
+              : ${item[`strMeasure${index + 1}`]}` }
             </div>
 
           )) }

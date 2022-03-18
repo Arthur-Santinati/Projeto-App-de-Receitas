@@ -77,21 +77,10 @@ function Header() {
     <header className="header">
       <h1 data-testid="page-title" className="title">{handleTitle()}</h1>
       <div className="nav">
-        <Link
-          to="/profile"
-        >
-          <img
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="profile-foto"
-            className="icons"
-          />
-        </Link>
-
         { visibleImage && (
           <button
             type="button"
-            className="icons button"
+            className="icons"
             onClick={ () => setVisibleInput((prevVisible) => !prevVisible) }
           >
             <img
@@ -106,6 +95,16 @@ function Header() {
         {visibleInput && (
           <Search />
         )}
+        <Link
+          to="/profile"
+        >
+          <img
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="profile-foto"
+            className="icons"
+          />
+        </Link>
       </div>
     </header>
   );

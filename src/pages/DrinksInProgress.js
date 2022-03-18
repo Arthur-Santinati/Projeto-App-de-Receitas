@@ -69,11 +69,7 @@ export default function DrinksInProgress() {
         .filter((item) => item[1] !== '' && item[1] !== ' ' && item[1] !== null)
         .map((item) => item[1]);
       console.log('medidas', MeasureName);
-      console.log('ingredientes', ingredientsName);
       setParagraphy(ingredientsName);
-      // const obj = { meals: { [id]: paragraph } };
-      // setFoodsProgress(obj);
-      // localStorage.setItem('inProgressRecipes', JSON.stringify(FoodsProgress));
       setDrinkDetail(result);
     }
     if (JSON.parse(localStorage.getItem('favoriteRecipes')) !== null) {
@@ -94,80 +90,70 @@ export default function DrinksInProgress() {
     };
     doThis();
   }
-
-  // function checkBoxFunc() {
-  //   const itemFromLS = JSON.parse(localStorage.getItem());
-  //   if(paragraphy.length === itemFromLS)
-  //   // console.log(target.checked);
-  //   // if (target.checked === true) {
-  //   //   setIsChecked(false);
-  //   // } else {
-  //   //   setIsChecked(true);
-  //   // }
-  //   // return isChecked;
-  // }
-  // console.log(paragraphy);
-
   return (
-    <div className="container-explorer">
-      DrinksInProgress
+    <div className="container-recipes">
       {drinkDetail.map((item) => (
         <div
           className="card"
           key={ item.idDrink }
         >
-          <h4 data-testid="recipe-title">
-            {item.strDrink}
-          </h4>
           <img
             src={ item.strDrinkThumb }
             alt="ImageCard"
-            width="200px"
-            height="200px"
+            className="ImageProgress"
             data-testid="recipe-photo"
           />
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ () => copyingLink() }
-          >
-            <img
-              alt="favorite"
-              src={ shareIcon }
-            />
-          </button>
-          <button
-            type="button"
-            className="btn-recipe"
-            onClick={ setingFavorite }
-          >
-            <img
-              alt="favorite"
-              data-testid="favorite-btn"
-              src={ isFav ? blackHeartIcon : whiteHeartIcon }
-            />
-          </button>
-          { copySuccess && <span>Link copied!</span>}
+          <div className="title-btn">
+            <h4 data-testid="recipe-title" className="name">
+              {item.strDrink}
+            </h4>
+            <div>
+              <button
+                type="button"
+                className="btn-recipe"
+                onClick={ setingFavorite }
+              >
+                <img
+                  alt="favorite"
+                  data-testid="favorite-btn"
+                  src={ isFav ? blackHeartIcon : whiteHeartIcon }
+                />
+              </button>
+              <button
+                type="button"
+                className="btn-recipe"
+                data-testid="share-btn"
+                onClick={ () => copyingLink() }
+              >
+                <img
+                  alt="favorite"
+                  src={ shareIcon }
+                />
+              </button>
+              { copySuccess && <span>Link copied!</span>}
+            </div>
+          </div>
           <p data-testid="recipe-category">{ item.strCategory }</p>
+          <h4>Instructions</h4>
           <p data-testid="recipe-category">{ item.strAlcoholic }</p>
           <p data-testid="instructions">
             { item.strInstructions }
           </p>
+          <h4>Ingredients</h4>
           <div>
             {paragraphy.map((ingrid, index) => (
               <div
                 key={ ingrid }
                 data-testid={ `${index}-ingredient-step` }
               >
-                {`${item[`strIngredient${index + 1}`]}
-              : ${item[`strMeasure${index + 1}`]}` }
                 <input
-                  // onChange={ checkBoxFunc }
-                  // checked={ inputChecked }
                   type="checkbox"
+                  className="checkbox"
                   value={ `${item[`strIngredient${index + 1}`]}
               : ${item[`strMeasure${index + 1}`]}` }
                 />
+                {`${item[`strIngredient${index + 1}`]}
+              : ${item[`strMeasure${index + 1}`]}` }
               </div>
             )) }
           </div>
@@ -175,9 +161,8 @@ export default function DrinksInProgress() {
       ))}
       <button
         type="button"
-        className="btn"
+        className="continue_btn"
         data-testid="finish-recipe-btn"
-        // disabled={ isChecked }
         onClick={ () => history.push('/done-recipes') }
       >
         Finish Recipe

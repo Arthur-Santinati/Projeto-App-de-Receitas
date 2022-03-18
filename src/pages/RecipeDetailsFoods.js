@@ -132,37 +132,40 @@ function RecipeDetailsFoods() {
           <img
             src={ foods.strMealThumb }
             alt="ImageCard"
-            width="200px"
-            height="200px"
+            className="imgDrinkRecipe"
             data-testid="recipe-photo"
           />
-          <h4 data-testid="recipe-title">
-            {foods.strMeal}
-          </h4>
-          {/* { btnLike() } */}
-          <button
-            type="button"
-            className="btn-recipe"
-            onClick={ setingFavorite }
-          >
-            <img
-              alt="favorite"
-              data-testid="favorite-btn"
-              src={ isFav ? blackHeartIcon : whiteHeartIcon }
-            />
-          </button>
-          <button
-            type="button"
-            className="btn-recipe"
-            data-testid="share-btn"
-            onClick={ () => copyingLink() }
-          >
-            <img
-              alt="favorite"
-              src={ shareIcon }
-            />
-          </button>
-          { copySuccess && <span>Link copied!</span>}
+          <div className="title-btn">
+            <h4 data-testid="recipe-title" className="name">
+              {foods.strMeal}
+            </h4>
+            <div>
+
+              <button
+                type="button"
+                className="btn-recipe"
+                onClick={ setingFavorite }
+              >
+                <img
+                  alt="favorite"
+                  data-testid="favorite-btn"
+                  src={ isFav ? blackHeartIcon : whiteHeartIcon }
+                />
+              </button>
+              <button
+                type="button"
+                className="btn-recipe"
+                data-testid="share-btn"
+                onClick={ () => copyingLink() }
+              >
+                <img
+                  alt="favorite"
+                  src={ shareIcon }
+                />
+              </button>
+              { copySuccess && <span>Link copied!</span>}
+            </div>
+          </div>
           <p data-testid="recipe-category">{ foods.strCategory }</p>
           <div>
             <h4>Instructions</h4>

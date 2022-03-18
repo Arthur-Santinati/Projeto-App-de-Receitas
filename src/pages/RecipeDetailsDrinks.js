@@ -141,35 +141,39 @@ function RecipeDetailsDrinks() {
           <img
             src={ item.strDrinkThumb }
             alt="ImageCard"
-            className="imgDrink"
+            className="imgDrinkRecipe"
             data-testid="recipe-photo"
           />
-          <h4 data-testid="recipe-title">
-            {item.strDrink}
-          </h4>
-          <button
-            type="button"
-            className="btn-recipe"
-            onClick={ setingFavorite }
-          >
-            <img
-              alt="favorite"
-              data-testid="favorite-btn"
-              src={ isFav ? blackHeartIcon : whiteHeartIcon }
-            />
-          </button>
-          <button
-            type="button"
-            className="btn-recipe"
-            data-testid="share-btn"
-            onClick={ () => copyingLink() }
-          >
-            <img
-              alt="favorite"
-              src={ shareIcon }
-            />
-          </button>
-          { copySuccess && <span>Link copied!</span>}
+          <div className="title-btn">
+            <h4 data-testid="recipe-title" className="name">
+              {item.strDrink}
+            </h4>
+            <div>
+              <button
+                type="button"
+                className="btn-recipe"
+                onClick={ setingFavorite }
+              >
+                <img
+                  alt="favorite"
+                  data-testid="favorite-btn"
+                  src={ isFav ? blackHeartIcon : whiteHeartIcon }
+                />
+              </button>
+              <button
+                type="button"
+                className="btn-recipe"
+                data-testid="share-btn"
+                onClick={ () => copyingLink() }
+              >
+                <img
+                  alt="favorite"
+                  src={ shareIcon }
+                />
+              </button>
+              { copySuccess && <span>Link copied!</span>}
+            </div>
+          </div>
           <p data-testid="recipe-category">{ item.strCategory }</p>
           <div>
             <h4>instructions</h4>
@@ -190,7 +194,7 @@ function RecipeDetailsDrinks() {
             <div
               className="containerRecomend"
             >
-              <h4>Receitas recomendadas</h4>
+              <h4>Recommended Recipes</h4>
               <div className="cardRecomend">
                 {drinkRecomended
                   .map((food, ind) => (

@@ -1,0 +1,30 @@
+.input-search {
+  border: none;
+  border-radius: 3px;
+  margin-right: 10px;
+  margin-top: 15px;
+  padding: 2px;
+}
+
+.input-search:focus {
+  border-color: #ff5100;
+  outline: none;
+}
+
+.btn-search {
+  background: #ff5100;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 3px;
+}
+
+.btn-search:hover {
+  color: black;
+}
+
+.label-radio {
+  font-size: 12px;
+  font-weight: 700;
+}

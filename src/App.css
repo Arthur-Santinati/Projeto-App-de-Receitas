@@ -1,3 +1,13 @@
-.meals {
-  align-items: center;
+::-webkit-scrollbar {
+  background-color: inherit;
+  color: dodgerblue;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: inherit;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f7a100;
 }
